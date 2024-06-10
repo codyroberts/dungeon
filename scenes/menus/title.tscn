@@ -1,0 +1,86 @@
+[gd_scene load_steps=10 format=3 uid="uid://uxxax52w0tbk"]
+
+[ext_resource type="Script" path="res://scripts/menus/title.gd" id="1_aa16v"]
+[ext_resource type="Texture2D" uid="uid://b2v6383i2i8gq" path="res://assets/images/dungeon.png" id="2_kek3y"]
+[ext_resource type="FontFile" uid="uid://cm3llnmp18tl8" path="res://assets/fonts/DragonlordPersonalUseOnlyRegular-PKxzm.otf" id="2_t0ly4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_erex6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ty3yh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n8boa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_44t0f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5feq1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3a87r"]
+
+[node name="Title" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -216.0
+offset_top = -48.0
+offset_right = -216.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aa16v")
+
+[node name="Dungeon" type="Sprite2D" parent="."]
+position = Vector2(299, 132)
+scale = Vector2(0.0556445, 0.0633245)
+texture = ExtResource("2_kek3y")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = -32.0
+offset_top = 64.0
+offset_right = 635.0
+offset_bottom = 220.0
+theme_override_colors/font_color = Color(0.0431373, 0, 0.105882, 1)
+theme_override_colors/font_outline_color = Color(1, 0.568627, 0.352941, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_t0ly4")
+theme_override_font_sizes/font_size = 32
+text = "Dungeon 
+Demo
+<"
+horizontal_alignment = 1
+
+[node name="Play" type="Button" parent="."]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 176.0
+offset_right = 280.0
+offset_bottom = 193.0
+theme_override_colors/font_color = Color(0.0431373, 0, 0.105882, 1)
+theme_override_colors/font_outline_color = Color(0.999999, 0.570455, 0.351423, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_t0ly4")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_erex6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ty3yh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_n8boa")
+text = "Play"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 176.0
+offset_right = 352.0
+offset_bottom = 193.0
+theme_override_colors/font_color = Color(0.0431373, 0, 0.105882, 1)
+theme_override_colors/font_outline_color = Color(0.999999, 0.570455, 0.351423, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_t0ly4")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_44t0f")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5feq1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_3a87r")
+text = "Quit"
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

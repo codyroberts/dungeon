@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=3 uid="uid://2pvorm35gnk3"]
+
+[ext_resource type="Script" path="res://scripts/characters/player.gd" id="1_t5pdv"]
+[ext_resource type="PackedScene" uid="uid://bcedu2vqxrhr8" path="res://scenes/interface/ui.tscn" id="2_07anq"]
+[ext_resource type="Texture2D" uid="uid://cu6ki0hlilr85" path="res://assets/sprites/goblin.png" id="2_qpvmk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qujy5"]
+radius = 1.0
+height = 6.0
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_t5pdv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.416, 2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_qujy5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_qpvmk")
+hframes = 16
+vframes = 24
+frame = 320
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="UI" parent="Camera2D" instance=ExtResource("2_07anq")]
+offset_right = 20.0
+
+[node name="Label" type="Label" parent="Camera2D"]
+offset_left = -40.0
+offset_top = -24.0
+offset_right = 40.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0.52549, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Attack_Range_DR" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Attack_Range_DR"]
+position = Vector2(1.05, 1.05)
+scale = Vector2(1.4375, 1.4375)
+polygon = PackedVector2Array(0, 0, 8, 0, 8, 0, 0, 8)
+
+[node name="Attack_Range_DL" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Attack_Range_DL"]
+position = Vector2(-1.05, 1.05)
+scale = Vector2(1.4375, 1.4375)
+polygon = PackedVector2Array(0, 0, 0, 8, 0, 8, -8, 0)
+
+[node name="Attack_Range_UL" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Attack_Range_UL"]
+position = Vector2(-1.05, -1.05)
+scale = Vector2(1.4375, 1.4375)
+polygon = PackedVector2Array(0, 0, 0, -8, 0, -8, -8, 0)
+
+[node name="Attack_Range_UR" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Attack_Range_UR"]
+position = Vector2(1.05, -1.05)
+scale = Vector2(1.4375, 1.4375)
+polygon = PackedVector2Array(0, 0, 8, 0, 0, -8, 0, -8)
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

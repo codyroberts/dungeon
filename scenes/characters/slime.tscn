@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://cv1t8440sunt"]
+
+[ext_resource type="Script" path="res://scripts/characters/slime.gd" id="1_6mcpw"]
+[ext_resource type="Texture2D" uid="uid://dpx67k1cjuyi8" path="res://scripts/environment/slime.png" id="2_32nhw"]
+[ext_resource type="PackedScene" uid="uid://bcedu2vqxrhr8" path="res://scenes/interface/ui.tscn" id="3_mt0j8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3fckc"]
+radius = 1.0
+height = 9.05312
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fnwrb"]
+radius = 24.5088
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x61eg"]
+radius = 52.7903
+
+[node name="Slime" type="CharacterBody2D"]
+script = ExtResource("1_6mcpw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.526711, 1.97216)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_3fckc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_32nhw")
+hframes = 9
+vframes = 13
+frame = 10
+
+[node name="AggroRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRange"]
+shape = SubResource("CircleShape2D_fnwrb")
+debug_color = Color(1, 0.0156863, 0, 0.419608)
+
+[node name="BreakRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakRange"]
+shape = SubResource("CircleShape2D_x61eg")
+
+[node name="UI" parent="." instance=ExtResource("3_mt0j8")]
+offset_left = -6.22588
+offset_top = -15.9943
+offset_right = 113.774
+offset_bottom = 44.0057
+scale = Vector2(0.2, 0.2)
+
+[node name="Recalculate" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[connection signal="body_entered" from="AggroRange" to="." method="_on_range_body_entered"]
+[connection signal="body_entered" from="AggroRange" to="." method="_on_aggro_range_body_entered"]
+[connection signal="body_exited" from="AggroRange" to="." method="_on_range_body_exited"]
+[connection signal="body_exited" from="BreakRange" to="." method="_on_break_range_body_exited"]
+[connection signal="timeout" from="Recalculate" to="." method="_on_recalculate_timeout"]
